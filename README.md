@@ -22,19 +22,20 @@ Representa uma instrução SQL a ser executada enquanto conectada a uma fonte de
 
 Temos basicamente três formas de executar comandos e retornar dados:
 
-1. **dbCommand.ExecuteNonQuery()**;
+1. **dbCommand.ExecuteNonQuery()**  
     Para inserir, atualizar e/ou excluir registros em um banco de dados. Retorna um valor `inteiro` com a quantidade de linhas afetadas.
 
-2. **dbCommand.ExecuteScalar()**;
+2. **dbCommand.ExecuteScalar()**  
     SQL SELECT para retornar apenas um valor do banco de dados.
 
-3. **dbCommand.ExecuteReader()**:
+3. **dbCommand.ExecuteReader()**  
     SQL SELECT para retornar um conjunto de dados para visualização.
+
+Obs: A leitura de coleções de dados exigem um pouco mais de complexidade utilizando o método **ExecuteReader** da interface ADO.NET. Por isso, neste caso, utilizamos o Micro
+ORM **Dapper**.
 
 
 Quando iniciada uma transação (`IDbConnection.BeginTransaction()`), podemos invocar os métodos `Commit()` e `Rollback()`. Vejamos mais sobre transaçoes no tópico a seguir.
-
-
 
 ## IDbTransaction:
 
@@ -45,6 +46,8 @@ Se uma transação for iniciada (`DbConnection.BeginTransaction()`), um comando 
 Usamos transações quando desejamos garantir que toda uma operação (sequencia de comandos) sejam executados. Sendo assim, podemos também cancelar (`DbTransaction.Rollback()`) todos os comandos executados até então.
 
 Obs: Se um comando SQL (insert, update, delete) for executado SEM INICIAR uma transação, ele será imediatamente efetivado no banco de dados.
+
+
 
 
 ## Referencias
